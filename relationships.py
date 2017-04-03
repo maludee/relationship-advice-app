@@ -44,7 +44,7 @@ app = flask.Flask(__name__)
 
 @app.route("/")
 def viz_page():
-    with open("index7.html", 'r') as viz_file:
+    with open("relationship-app.html", 'r') as viz_file:
         return viz_file.read()
 
 @app.route("/relationships", methods=["POST"])
