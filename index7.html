@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<head>
+
+  <meta charset="utf-8">
+
+  <script 
+    src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
+  </script>
+
+  <link href='//fonts.googleapis.com/css?family=League Script' rel='stylesheet'>
+  <link href='//fonts.googleapis.com/css?family=Bubbler One' rel='stylesheet'>
+  <link href='//fonts.googleapis.com/css?family=Permanent Marker' rel='stylesheet'>
+  <link href='//fonts.googleapis.com/css?family=Basic' rel='stylesheet'>
+
+</head>
+
+<style type = "text/css">
+  
+  body {
+    background-color: #ffe6ea;
+    width: 700px; margin: auto;
+  }
+
+  .welcome-message {
+    text-align: center;
+    font-family: 'Permanent Marker';font-size: 22px;
+  }
+
+  .page-header {
+    font-size: 60px;
+    font-family: 'Permanent Marker';
+    font-weight: bold;
+    text-align: center;
+    
+  }
+
+  .input-group-label {
+    font-size: 16px;
+    font-family: 'Permanent Marker';
+    font-size: 22px;
+  }
+
+  .input-group-field {
+    width: 600px;
+    height: 100px;
+    border-style: dashed;
+    border-width: 1px;
+    border-color: gray;
+    font-size: 12px;
+  }
+
+  .send-button {
+    height: 28px;
+    background-color: #c1d9ff;
+    font-size: 16px;
+    font-family: 'Basic';
+    color: black;
+    font-weight: bold;
+    border: 2px solid #c1d9ff; /* Green */
+
+  }
+
+  .send-button:hover {
+    background-color: #3769ba; /* Green */
+    color: white;
+}
+
+  .user-answer-label {
+    font-family: 'Permanent Marker';font-size: 22px;
+  }
+
+  .answer-for-user {
+    width: 600px;
+    height: 50px;
+    border-style: dashed;
+    border-width: 1px;
+    border-color: gray;
+    font-size: 16px;
+  }
+
+  ::-webkit-input-placeholder { 
+    color: gray;
+  }
+
+</style>
+
+
+<body>
+
+
+  <label class="page-header">Dear r/relationships...</label><br>
+  <br>
+
+<form>
+  
+  <label class="welcome-message"
+  <p>Welcome! <br>
+  Please enter your relationship question below, and r/relationships will tell you what to do (succinctly). <br>
+  Please be as descriptive as possible!</p>
+  </label>
+
+      <label class="input-group-label">Your question: </label>
+    <br>
+      <textarea class="input-group-field" placeholder="Type or paste your question here" id="user-question"></textarea>
+      <br>
+   
+      <input 
+        class="send-button" 
+        type="button" 
+        value="SUBMIT"
+        onClick="collectQuestion()"
+        />
+    
+      <p class=""></p>
+   
+  <br>
+<label class="user-answer-label">R/relationships says: </label>
+<br>
+<textarea 
+  class="answer-for-user" 
+  name="area" 
+  id="user-answer"
+  
+  readonly></textarea>
+
+</form>
+
+<script>
+
+var answer = ""
+
+// Gets the question that the user typed in
+
+
+function collectQuestion() {
+  var userQuestion = document.getElementById("user-question").value;
+  // Remove newline characters
+  var userQuestion = userQuestion.replace(/\r?\n|\r/g, " ");
+  // Remove quotation marks 
+  var userQuestion = userQuestion.replace(/['"]+/g, '')
+  //console.log(typeof userQuestion);
+  //console.log(userQuestion);
+
+  $.ajax({
+    type: "POST",
+    contentType: "application/json; charset=utf-8",
+    url: "/relationships",
+    dataType: "json",
+    async: true,
+    // data: JSON.stringify({"question" : ["+userQuestion+"]}),
+    data: "{\"question\": [\""+userQuestion+"\"]}",
+    success: function(d) {
+      answer = d.answer
+      document.getElementById("user-answer").value = answer
+      // console.log(userQuestion)
+    }
+
+  })
+}
+        
+</script>
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
