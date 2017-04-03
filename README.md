@@ -2,7 +2,7 @@
 
 This app takes a relationship question and answers it using NLP!
 
-![alt text](https://github.com/maludee/relationship-advice-app/app-pic.png
+![alt text](https://github.com/maludee/relationship-advice-app/app-pic.png)
 
 These answers are generated using data collected from reddit.com/r/relationships. 
 
